@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Services from './pages/Services'
 import About from './pages/About'
+import DonatePage from './pages/DonatePage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -12,6 +13,7 @@ function App() {
     <div >
      {/* <Services/> */}
      {/* <About/> */}
+     <DonatePage />
     </div>
   )
 }
