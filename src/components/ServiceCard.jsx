@@ -1,27 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { FaArrowRight } from "react-icons/fa6";
 
-const ServiceCard = ({service}) => {
+const ServiceCard = ({ service }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
+  };
+
   return (
-    
-<div class="max-w-[90%] sm:max-w-sm bg-white   rounded-lg shadow-xl  ">
-    <a href="#">
-        <img class="rounded-t-lg" src={service.pic} alt="" />
-    </a>
-    <div class="p-5">
+    <div className="max-w-[90%] sm:max-w-sm bg-white mt-4 break-words m-auto rounded-lg shadow-xl">
+      <a href="#">
+        <img className="rounded-t-lg h-60 w-full" src={service.pic} alt={service.title} />
+      </a>
+      <div className="p-5">
         <a href="#">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black capitalize">{service.title}</h5>
+          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black capitalize">{service.title}</h5>
         </a>
-        <p class="mb-3 font-normal dark:text-gray-600">{service.description}</p>
-        <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-700 opacity-90 rounded-lg hover:opacity-100  focus:outline-none  shadow-md">
-            Read more
-             <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-            </svg>
-        </a>
+        <p className="mb-3 font-normal dark:text-gray-600">
+          {isExpanded ? service.description : service.description.length > 200 ? `${service.description.slice(0, 250)} ...` : service.description}
+        </p>
+        <button 
+          className="inline-flex gap-2 items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-700 opacity-90 rounded-lg hover:opacity-100 focus:outline-none shadow-md"
+          onClick={toggleExpand}
+        >
+          {isExpanded ? 'Show less' : 'Read more'} <FaArrowRight />
+        </button>
+      </div>
     </div>
-</div>
-
-  )
+  );
 }
 
-export default ServiceCard
+export default ServiceCard;
